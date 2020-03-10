@@ -9,8 +9,17 @@ def index():
     return render_template('index.html')
 
 @app.route('/graph/')
-def about():
+def graph():
     return render_template('graph.html')
+def chart_data():
+    def generate_random_data():
+        while True:
+            json_data = json.dumps(
+                {'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'value': random.random() * 100})
+            yield f"data:{json_data}\n\n"
+            time.sleep(1)
+
+    return Response(generate_random_data(), mimetype='text/event-stream')
 
 
 
