@@ -13,6 +13,10 @@ random.seed()  # Initialize the random number generator
 def index():
     return render_template('index.html')
 
+
+@app.route('/hello') def hello_world():
+    return 'Hello, World!'
+
 @app.route('/graph/')
 def graph():
     return render_template('graph.html')
