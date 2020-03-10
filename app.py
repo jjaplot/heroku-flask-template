@@ -5,6 +5,12 @@ from datetime import datetime
 
 from flask import Flask, Response, render_template
 
+import paho.mqtt.subscribe as subscribe
+
+def on_message_print(client, userdata, message):
+    print("%s %s" % (message.topic, message.payload))
+
+subscribe.callback(on_message_print, "paho/test/callback", hostname="mqtt.eclipse.org")
 
 app = Flask(__name__)
 random.seed()  # Initialize the random number generator
