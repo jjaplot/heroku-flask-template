@@ -7,7 +7,7 @@ from flask import Flask, Response, render_template
 
 
 app = Flask(__name__)
-
+random.seed()  # Initialize the random number generator
 
 @app.route('/')
 def index():
@@ -16,6 +16,8 @@ def index():
 @app.route('/graph/')
 def graph():
     return render_template('graph.html')
+
+@application.route('/chart-data')
 def chart_data():
     def generate_random_data():
         while True:
@@ -25,7 +27,6 @@ def chart_data():
             time.sleep(1)
 
     return Response(generate_random_data(), mimetype='text/event-stream')
-
 
 
 if __name__ == '__main__': app.run(debug=True)
