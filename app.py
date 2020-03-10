@@ -17,6 +17,11 @@ def index():
 def graph():
     return render_template('graph.html')
 
+@app.route('/users/<name>', methods=['POST'])
+def create_user(name):
+
+    msg = f'user {name} created'
+    return make_response(msg, 201)
 
 @app.route('/chart-data')
 def chart_data():
