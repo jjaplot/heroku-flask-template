@@ -18,7 +18,7 @@ def graph():
     return render_template('graph.html')
 
 
-@application.route('/chart-data')
+@app.route('/chart-data')
 def chart_data():
     def generate_random_data():
         while True:
