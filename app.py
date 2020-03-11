@@ -21,11 +21,6 @@ def index():
 def hello_world():
     return 'Hello, World!'
 
-def on_message_print(client, userdata, message):
-    print("%s %s" % (message.topic, message.payload))
-
-subscribe.callback(on_message_print, "paho/test/callback", hostname="mqtt.eclipse.org")
-
 @app.route('/graph/')
 def graph():
     return render_template('graph.html')
