@@ -7,10 +7,7 @@ from flask import Flask, Response, render_template
 
 import paho.mqtt.subscribe as subscribe
 
-def on_message_print(client, userdata, message):
-    print("%s %s" % (message.topic, message.payload))
 
-subscribe.callback(on_message_print, "paho/test/callback", hostname="mqtt.eclipse.org")
 
 app = Flask(__name__)
 random.seed()  # Initialize the random number generator
@@ -24,15 +21,15 @@ def index():
 def hello_world():
     return 'Hello, World!'
 
+def on_message_print(client, userdata, message):
+    print("%s %s" % (message.topic, message.payload))
+
+subscribe.callback(on_message_print, "paho/test/callback", hostname="mqtt.eclipse.org")
+
 @app.route('/graph/')
 def graph():
     return render_template('graph.html')
 
-@app.route('/users/<name>', methods=['POST'])
-def create_user(name):
-
-    msg = f'user {name} created'
-    return make_response(msg, 201)
 
 @app.route('/chart-data')
 def chart_data():
